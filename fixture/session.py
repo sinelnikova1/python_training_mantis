@@ -6,21 +6,30 @@ class SessionHelper:
     def login(self, username, password):
         wd = self.app.wd
         self.app.open_home_page()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
+        # login
+        wd.find_element_by_name("username").click()
+        wd.find_element_by_name("username").clear()
+        wd.find_element_by_name("username").send_keys("%s" % username)
+        wd.find_element_by_name("password").clear()
+        wd.find_element_by_name("password").send_keys("%s" % password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
+
+    def ensure_login(self, username, password):
+        wd = self.app.wd
+        if self.is_logged_in():
+            if self.is_logged_in_as(username):
+                return
+            else:
+                self.logout()
+        self.login(username, password)
 
     def logout(self):
         wd = self.app.wd
         wd.find_element_by_link_text("Logout").click()
-        #self.app.wd.find_element_by_name("user")
+        # wd.find_element_by_name("user")
 
     def ensure_logout(self):
         wd = self.app.wd
-        # если есть хотя бы один элемент логаута, то выполнить логаут
         if self.is_logged_in():
             self.logout()
 
@@ -34,18 +43,4 @@ class SessionHelper:
 
     def get_logged_user(self):
         wd = self.app.wd
-        # вырезаем всё, кроме круглых скобочек, т.е. [1:-1]
-        return wd.find_element_by_xpath("//div[@id='top']/form/b").text[1:-1]
-
-    def ensure_login(self, username, password):
-        wd = self.app.wd
-        # если мы вошли в систему, то проверить, что вход под нужным юзером и осуществить вход
-        if self.is_logged_in():
-            if self.is_logged_in_as(username):
-                return
-            # если пользователь не тот, то разлогиниваемся и пробуем логинится снова
-            else:
-                self.logout()
-        self.login(username, password)
-
-
+        return wd.find_element_by_css_selector("td.login-info-left span").text
