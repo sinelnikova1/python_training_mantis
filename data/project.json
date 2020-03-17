@@ -1,0 +1,22 @@
+[
+  {
+    "py/object": "model.project.Project",
+    "description": "description voMaTKjO eqTeZSV6j8 aS",
+    "enabled": false,
+    "id": null,
+    "inherit_global_categories": false,
+    "name": "namen",
+    "status": "stable",
+    "view_state": "private"
+  },
+  {
+    "py/object": "model.project.Project",
+    "description": "descriptionHpj pRVC lFqrmz LaUnR4bCb",
+    "enabled": false,
+    "id": null,
+    "inherit_global_categories": false,
+    "name": "namef",
+    "status": "stable",
+    "view_state": "public"
+  }
+]
