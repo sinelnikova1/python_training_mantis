@@ -1,22 +1,22 @@
 [
   {
     "py/object": "model.project.Project",
-    "description": "description voMaTKjO eqTeZSV6j8 aS",
-    "enabled": false,
+    "description": "descriptionRRL",
+    "enabled": true,
     "id": null,
-    "inherit_global_categories": false,
-    "name": "namen",
-    "status": "stable",
-    "view_state": "private"
+    "inherit_global_categories": true,
+    "name": "namel 5r U",
+    "status": "obsolete",
+    "view_state": "public"
   },
   {
     "py/object": "model.project.Project",
-    "description": "descriptionHpj pRVC lFqrmz LaUnR4bCb",
-    "enabled": false,
+    "description": "descriptiond1Tv0P9j3EQI eKKFEc8LHo",
+    "enabled": true,
     "id": null,
     "inherit_global_categories": false,
-    "name": "namef",
-    "status": "stable",
-    "view_state": "public"
+    "name": "namebr1 A",
+    "status": "release",
+    "view_state": "private"
   }
 ]

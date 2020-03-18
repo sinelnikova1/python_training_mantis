@@ -6,7 +6,6 @@ import jsonpickle
 import os.path
 import ftputil
 
-
 fixture = None
 target = None
 
@@ -28,18 +27,20 @@ def config(request):
 @pytest.fixture
 def app(request, config):
     global fixture
+    global target
     browser = request.config.getoption("--browser")
+    web_config = config['web']
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, config=config)
-    fixture.session.ensure_login(username=config["webadmin"]["username"], password=config["webadmin"]["password"])
+    fixture.session.ensure_login(username=web_config['login'], password=web_config['password'])
     return fixture
 
 
 @pytest.fixture(scope="session", autouse=True)
 def configure_server(request, config):
-    install_server_configuration(config["ftp"]["host"], config["ftp"]["username"], config["ftp"]["password"])
+    install_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
     def fin():
-        restore_server_configuration(config["ftp"]["host"], config["ftp"]["username"], config["ftp"]["password"])
+        restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
     request.addfinalizer(fin)
 
 
@@ -58,6 +59,7 @@ def restore_server_configuration(host, username, password):
             if remote.path.isfile("config_inc.php"):
                 remote.remove("config_inc.php")
             remote.rename("config_inc.php.bak", "config_inc.php")
+
 
 
 @pytest.fixture(scope="session", autouse=True)
